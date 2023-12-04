@@ -1,0 +1,22 @@
+# Load the Rsamtools library
+library(Rsamtools)
+
+# Define the BAM file
+bam_file <- "....sorted.bam" #path of the aligned sorted bam
+
+# Open the BAM file
+bam <- BamFile(bam_file)
+
+# Get the header
+header <- scanBamHeader(bam)
+
+# Open a text file to write
+fileConn <- file("C:/Users/pg22/OneDrive - King's College London/Documents/metadata_ivy.txt", "w")
+
+# Write the header to the text file
+for (name in names(header)) {
+  writeLines(paste(name, toString(header[[name]])), fileConn)
+}
+
+# Close the text file
+close(fileConn)
